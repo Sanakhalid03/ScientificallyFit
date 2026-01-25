@@ -12,43 +12,49 @@ import {
 import { motion } from "framer-motion";
 
 export function ProgramsSection() {
-  const programs = [
-    {
-      title: "Focus Rebuild",
-      description: "Restore mental clarity and rebuild sustained attention.",
-      icon: IconAdjustmentsBolt,
-      href: "#focus-rebuild",
-      accent: "from-indigo-400 to-cyan-400",
-    },
-    {
-      title: "Burnout Reset",
-      description: "Recover energy and regulate stress physiology.",
-      icon: IconFlame,
-      href: "#burnout-reset",
-      accent: "from-amber-400 to-orange-400",
-    },
-    {
-      title: "Sleep Reset",
-      description: "Align circadian rhythms and improve recovery.",
-      icon: IconBed,
-      href: "#sleep-reset",
-      accent: "from-sky-400 to-blue-500",
-    },
-    {
-      title: "Communication Fitness",
-      description: "Strengthen social and professional resilience.",
-      icon: IconHeartHandshake,
-      href: "#communication-fitness",
-      accent: "from-emerald-400 to-teal-400",
-    },
-    {
-      title: "Urban Survival",
-      description: "Maintain wellbeing in high-demand environments.",
-      icon: IconBuilding,
-      href: "#urban-survival",
-      accent: "from-slate-400 to-zinc-500",
-    },
-  ];
+const programs = [
+  {
+    title: "Focus Rebuild",
+    description: "Restore mental clarity and rebuild sustained attention.",
+    icon: IconAdjustmentsBolt,
+    href: "#focus-rebuild",
+    slug: "focus-rebuild",      // <-- add this
+    accent: "from-indigo-400 to-cyan-400",
+  },
+  {
+    title: "Burnout Reset",
+    description: "Recover energy and regulate stress physiology.",
+    icon: IconFlame,
+    href: "#burnout-reset",
+    slug: "burnout-reset",      // <-- add this
+    accent: "from-amber-400 to-orange-400",
+  },
+  {
+    title: "Sleep Reset",
+    description: "Align circadian rhythms and improve recovery.",
+    icon: IconBed,
+    href: "#sleep-reset",
+    slug: "sleep-reset",        // <-- add this
+    accent: "from-sky-400 to-blue-500",
+  },
+  {
+    title: "Communication Fitness",
+    description: "Strengthen social and professional resilience.",
+    icon: IconHeartHandshake,
+    href: "#communication-fitness",
+    slug: "communication-fitness", // <-- add this
+    accent: "from-emerald-400 to-teal-400",
+  },
+  {
+    title: "Urban Survival",
+    description: "Maintain wellbeing in high-demand environments.",
+    icon: IconBuilding,
+    href: "#urban-survival",
+    slug: "urban-survival",     // <-- add this
+    accent: "from-slate-400 to-zinc-500",
+  },
+];
+
 
   return (
     <section className="relative py-32 bg-gradient-to-b from-slate-50 via-white to-slate-100 overflow-hidden">
@@ -121,10 +127,13 @@ export function ProgramsSection() {
                 </p>
 
                 {/* CTA */}
-                <div className="relative z-10 mt-6 text-sm font-semibold text-indigo-600 flex items-center gap-2">
-                  Explore
-                  <span className="transition-transform group-hover:translate-x-1">→</span>
-                </div>
+              <div className="relative z-10 mt-6 text-sm font-semibold text-indigo-600 flex items-center gap-2">
+  <Link href={`/programs/${program.slug}`} className="flex items-center gap-1 group">
+    <span>Explore</span>
+    <span className="transition-transform group-hover:translate-x-1">→</span>
+  </Link>
+</div>
+
               </motion.div>
             </Link>
           );

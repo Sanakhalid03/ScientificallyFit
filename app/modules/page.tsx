@@ -64,8 +64,10 @@ const modules: ModuleType[] = [
 
 // ------------------------
 // Gradient Card Component
-// ------------------------
-const GradientCard: React.FC<{ module: ModuleType; index: number }> = ({ module, index }) => {
+const GradientCard: React.FC<{ module: ModuleType; index: number }> = ({
+  module,
+  index,
+}) => {
   const Icon = module.icon;
 
   return (
@@ -73,38 +75,55 @@ const GradientCard: React.FC<{ module: ModuleType; index: number }> = ({ module,
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.15, duration: 0.6 }}
+      transition={{ delay: index * 0.35, duration: 0.3 }}
       className="group relative rounded-3xl p-[2px] overflow-hidden"
     >
-      {/* Gradient Background */}
-      <motion.div
-        className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${module.gradient} transition-all duration-700`}
-        whileHover={{ background: `linear-gradient(135deg, var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to))` }}
+      {/* Gradient border */}
+      <div
+        className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${module.gradient} transition-all duration-500`}
       />
+
+      {/* Glow overlay */}
+      <div className="absolute inset-0 rounded-3xl opacity-0 blur-xl bg-gradient-to-br from-white/20 via-white/10 to-white/0 group-hover:opacity-50 transition-all duration-500" />
 
       <Link href={module.href}>
         <motion.div
-          whileHover={{ scale: 1.03 }}
-          className={`relative rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 backdrop-blur-sm bg-white/70`}
+          whileHover={{ y: -8, rotateX: 3, rotateY: -3 }}
+          transition={{ type: "spring", stiffness: 180, damping: 14 }}
+          className="relative rounded-3xl p-8 shadow-lg group-hover:shadow-2xl transition-all duration-500 bg-white/75 backdrop-blur-md"
         >
+          {/* Subtle shine effect on hover */}
+          <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-30 transition-all duration-700" />
+
+          {/* Icon */}
           <motion.div
-            whileHover={{ scale: 1.2 }}
+            whileHover={{ scale: 1.15 }}
             className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-gradient-to-br ${module.gradient} text-white shadow-md`}
+            style={{ filter: "drop-shadow(0 3px 6px rgba(0,0,0,0.3))" }} // makes icon pop
           >
-            <Icon className="w-6 h-6" />
+            <Icon className="w-6 h-6 text-white" />
           </motion.div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">
+
+          {/* Title */}
+          <h3 className="text-2xl font-bold text-gray-900 mb-2">
             {module.title}
           </h3>
+
+          {/* Description */}
           <p className="text-gray-600 mb-4">{module.description}</p>
+
+          {/* Outcomes */}
           <ul className="text-gray-700 text-sm space-y-1 ml-2 mb-4">
             {module.outcomes.map((outcome, i) => (
               <li key={i} className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-indigo-400 inline-block" /> {outcome}
+                <span className="w-2 h-2 rounded-full bg-indigo-400 inline-block" />
+                {outcome}
               </li>
             ))}
           </ul>
-          <div className="text-indigo-700 font-semibold group-hover:underline flex items-center gap-1">
+
+          {/* CTA */}
+          <div className="text-indigo-700 font-semibold flex items-center gap-1">
             Explore Module <ArrowRight className="w-4 h-4" />
           </div>
         </motion.div>
@@ -112,6 +131,7 @@ const GradientCard: React.FC<{ module: ModuleType; index: number }> = ({ module,
     </motion.div>
   );
 };
+
 
 // ------------------------
 // Section Header

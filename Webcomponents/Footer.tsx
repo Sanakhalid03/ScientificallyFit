@@ -8,11 +8,11 @@ export default function FooterAnimated() {
   const [email, setEmail] = useState('')
 
   return (
-    <footer className="relative bg-gradient-to-t from-blue-50 to-white overflow-hidden ">
+    <footer className="relative bg-gradient-to-t from-blue-50 to-white overflow-hidden m-0 p-0">
       {/* Animated wave background */}
       <motion.div
         className="absolute inset-0"
-        animate={{ y: [0, 10, 0] }}
+        animate={{ opacity: [0.6, 1, 0.6] }} // soft breathing
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           background: 'radial-gradient(circle at top, #e0f2ff, transparent 70%)',
@@ -26,20 +26,21 @@ export default function FooterAnimated() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
-        className="relative max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-5 gap-12 z-10"
+        className="relative max-w-7xl mx-auto px-6 py-16 sm:py-20 grid grid-cols-1 md:grid-cols-5 gap-12 z-10"
       >
         {/* Brand */}
-        <div className="md:col-span-2">
-          <h3 className="text-2xl font-bold tracking-tight">
+        <div className="md:col-span-2 flex flex-col">
+          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight">
             Scientifically<span className="text-blue-600">Fit</span>
           </h3>
           <p className="mt-4 text-gray-600 leading-relaxed max-w-sm">
             A science-backed platform for human functioning — helping individuals, families, 
             and modern professionals adapt, recover, and thrive.
           </p>
+
           {/* Newsletter */}
           <motion.div
-            className="mt-6 flex gap-2"
+            className="mt-6 flex flex-col sm:flex-row gap-2 sm:gap-0 w-full max-w-md"
             whileHover={{ scale: 1.02 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
@@ -48,9 +49,9 @@ export default function FooterAnimated() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Your email"
-              className="px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 flex-1"
+              className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 flex-1 w-full"
             />
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-r-full hover:bg-blue-700 transition">
+            <button className="mt-2 sm:mt-0 px-4 py-2 bg-blue-600 text-white rounded-full sm:rounded-l-none sm:rounded-r-full hover:bg-blue-700 transition w-full sm:w-auto">
               Subscribe
             </button>
           </motion.div>
@@ -83,10 +84,10 @@ export default function FooterAnimated() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="border-t border-gray-200 text-gray-500 text-xs flex flex-col md:flex-row justify-between items-center px-6 py-6 gap-2 z-10 relative"
+        className="border-t border-gray-200 text-gray-500 text-xs flex flex-col sm:flex-row justify-between items-center px-6 py-6 gap-2 z-10 relative"
       >
         <span>© {new Date().getFullYear()} ScientificallyFit. All rights reserved.</span>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-4">
           <AnimatedLink href="/privacy">Privacy</AnimatedLink>
           <AnimatedLink href="/terms">Terms</AnimatedLink>
           <AnimatedLink href="/disclaimer">Disclaimer</AnimatedLink>

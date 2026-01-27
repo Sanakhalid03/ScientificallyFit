@@ -153,23 +153,24 @@ const SectionHeader: React.FC<{ title: string; subtitle?: string }> = ({ title, 
 const ModulesPage: React.FC = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
-      {/* Hero Section */}
-      <section className="py-24 bg-gradient-to-br from-indigo-100 via-white to-cyan-100 text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7 }}
-          className="max-w-3xl mx-auto"
-        >
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            Four Pillars of Human Functioning
-          </h1>
-          <p className="text-lg text-gray-700 max-w-xl mx-auto">
-            Each module is a science-backed system designed to elevate your
-            wellbeing across mind, relationships, environment, and family.
-          </p>
-        </motion.div>
-      </section>
+{/* Hero Section */}
+<section className="py-20 sm:py-24 md:py-32 bg-gradient-to-br from-indigo-100 via-white to-cyan-100 text-center px-4">
+  <motion.div
+    initial={{ opacity: 0, scale: 0.95 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.7 }}
+    className="max-w-full sm:max-w-2xl md:max-w-3xl mx-auto"
+  >
+    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
+      Four Pillars of Human Functioning
+    </h1>
+    <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-full sm:max-w-xl mx-auto leading-relaxed">
+      Each module is a science-backed system designed to elevate your
+      wellbeing across mind, relationships, environment, and family.
+    </p>
+  </motion.div>
+</section>
+
 
       {/* Modules Grid */}
       <section className="py-16 px-6 lg:px-12">

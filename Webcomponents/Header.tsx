@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-
 import Link from 'next/link'
 
 const navLinks = [
@@ -23,7 +22,7 @@ export default function Navbar() {
   return (
     <>
       {/* NAVBAR */}
-      <header className="fixed top-0 w-full z-[60] bg-white/90 backdrop-blur-md border-b border-zinc-200 dark:bg-zinc-950/90 dark:border-zinc-800 transition-all">
+      <header className="fixed top-0 w-full z-[999] bg-white/60 backdrop-blur-xs border-b border-zinc-200 dark:bg-zinc-950/90 dark:border-zinc-800 transition-all">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-14 md:h-16 flex items-center justify-between">
           {/* Logo */}
           <Link
@@ -58,39 +57,41 @@ export default function Navbar() {
               Start Free
             </Link>
 
-            {/* Modern Hamburger */}
-        <button
-  onClick={() => setIsOpen(!isOpen)}
-  className="md:hidden w-9 h-9 flex items-center justify-center bg-zinc-100 dark:bg-zinc-900 rounded-full text-black dark:text-white transition"
->
-  <AnimatePresence mode="wait">
-    {!isOpen ? (
-      <motion.span
-        key="menu"
-        initial={{ rotate: -90, opacity: 0, scale: 0.7 }}
-        animate={{ rotate: 0, opacity: 1, scale: 1 }}
-        exit={{ rotate: 90, opacity: 0, scale: 0.7 }}
-        transition={{ duration: 0.2 }}
-      >
-        <Menu size={18} />
-      </motion.span>
-    ) : (
-      <motion.span
-        key="close"
-        initial={{ rotate: -90, opacity: 0, scale: 0.7 }}
-        animate={{ rotate: 0, opacity: 1, scale: 1 }}
-        exit={{ rotate: 90, opacity: 0, scale: 0.7 }}
-        transition={{ duration: 0.2 }}
-      >
-        <X size={18} />
-      </motion.span>
-    )}
-  </AnimatePresence>
-</button>
-
+            {/* Hamburger */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden w-9 h-9 flex items-center justify-center bg-zinc-100 dark:bg-zinc-900 rounded-full text-black dark:text-white transition"
+            >
+              <AnimatePresence mode="wait">
+                {!isOpen ? (
+                  <motion.span
+                    key="menu"
+                    initial={{ rotate: -90, opacity: 0, scale: 0.7 }}
+                    animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                    exit={{ rotate: 90, opacity: 0, scale: 0.7 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu size={18} />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0, scale: 0.7 }}
+                    animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                    exit={{ rotate: 90, opacity: 0, scale: 0.7 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X size={18} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
           </div>
         </nav>
       </header>
+
+      {/* Spacer to prevent content behind navbar */}
+      <div className="h-14 md:h-16" />
 
       {/* MOBILE MENU */}
       <AnimatePresence>

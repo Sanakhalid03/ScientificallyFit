@@ -154,22 +154,28 @@ const ModulesPage: React.FC = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
 {/* Hero Section */}
-<section className="py-20 sm:py-24 md:py-32 bg-gradient-to-br from-indigo-100 via-white to-cyan-100 text-center px-4">
+<section className="relative py-20 sm:py-24 md:py-32 bg-gradient-to-br from-indigo-100 via-white to-cyan-100 text-center px-4 overflow-hidden">
+  {/* Moving Gradient Background Overlay */}
+  <div className="absolute inset-0 animate-hue bg-[linear-gradient(120deg,#e0e7ff,#ecfeff,#fdf2f8)] mix-blend-overlay opacity-40" />
+
   <motion.div
     initial={{ opacity: 0, scale: 0.95 }}
     animate={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 0.7 }}
-    className="max-w-full sm:max-w-2xl md:max-w-3xl mx-auto"
+    transition={{ duration: 0.2 }}
+    className="relative z-10 max-w-full sm:max-w-2xl md:max-w-5xl mx-auto"
   >
-    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
-      Four Pillars of Human Functioning
-    </h1>
-    <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-full sm:max-w-xl mx-auto leading-relaxed">
+    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight
+  text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-cyan-500 to-fuchsia-500 animate-gradient-text">
+  Four Pillars of Human Functioning
+</h1>
+
+    <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-full sm:max-w-2xl mx-auto leading-relaxed">
       Each module is a science-backed system designed to elevate your
       wellbeing across mind, relationships, environment, and family.
     </p>
   </motion.div>
 </section>
+
 
 
       {/* Modules Grid */}

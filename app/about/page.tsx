@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+// Icons for the trust section
+import { Microscope, ShieldCheck, Globe, Lightbulb } from "lucide-react";
 
 /* ---------------- DATA ---------------- */
 
@@ -31,31 +33,35 @@ const missionCards = [
 const credibilityCards = [
   {
     title: "Science-Backed",
-    desc: "All programs are designed with research from neuroscience, psychology, and physiology.",
-    gradientFrom: "#6366f1",
-    gradientTo: "#06b6d4",
+    desc: "All programs are designed with research from neuroscience and physiology.",
+    gradient: "from-blue-500 to-cyan-400",
+    icon: <Microscope className="w-7 h-7" />,
+    glow: "group-hover:shadow-blue-200/50",
   },
   {
     title: "Trusted Expertise",
     desc: "Developed by leading practitioners and verified by clinical studies.",
-    gradientFrom: "#f472b6",
-    gradientTo: "#fb923c",
+    gradient: "from-emerald-500 to-teal-400",
+    icon: <ShieldCheck className="w-7 h-7" />,
+    glow: "group-hover:shadow-emerald-200/50",
   },
   {
     title: "Global Reach",
     desc: "Helping thousands of users optimize performance worldwide.",
-    gradientFrom: "#22c55e",
-    gradientTo: "#14b8a6",
+    gradient: "from-orange-400 to-yellow-400",
+    icon: <Globe className="w-7 h-7" />,
+    glow: "group-hover:shadow-orange-200/50",
   },
   {
     title: "Innovative Insights",
     desc: "Combining cutting-edge tools with actionable feedback loops.",
-    gradientFrom: "#a855f7",
-    gradientTo: "#f43f5e",
+    gradient: "from-purple-500 to-pink-400",
+    icon: <Lightbulb className="w-7 h-7" />,
+    glow: "group-hover:shadow-purple-200/50",
   },
 ];
 
-/* -------- FIXED MISSION CARD (NO DOM LEAK) -------- */
+/* -------- ORIGINAL MISSION CARD -------- */
 
 const MissionCard = styled.div<{
   $gradientFrom: string;
@@ -128,13 +134,62 @@ const MissionCard = styled.div<{
   }
 `;
 
+/* ---------------- NEW TRUST CARD COMPONENT ---------------- */
+
+const TrustCard = ({ title, desc, gradient, icon, glow, delay }: any) => {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay, duration: 0.8 }}
+      className="group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:-rotate-1"
+    >
+      <div className={`text-slate-800 rounded-3xl border border-white/40 bg-white/50 shadow-2xl duration-700 z-10 relative backdrop-blur-xl hover:border-white/60 overflow-hidden ${glow} w-full h-full flex flex-col items-center p-8`}>
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <div className={`absolute inset-0 bg-gradient-to-tr ${gradient} opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-500`} />
+          <div style={{animationDelay: '0.5s'}} className={`absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-gradient-to-tr ${gradient} blur-3xl opacity-10 group-hover:opacity-30 transform group-hover:scale-110 transition-all duration-700 animate-bounce`} />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent transform -skew-x-12 translate-x-full group-hover:translate-x-[-250%] transition-transform duration-1000" />
+        </div>
+        
+        <div className="relative z-10 flex flex-col items-center text-center">
+          <div className="relative mb-6">
+            <div className={`absolute inset-0 rounded-full border-2 border-slate-200 animate-ping opacity-20`} />
+            <div className={`p-5 rounded-2xl backdrop-blur-lg border border-white/50 bg-gradient-to-br ${gradient} shadow-lg text-white transform group-hover:rotate-[360deg] transition-transform duration-1000`}>
+              {icon}
+            </div>
+          </div>
+          
+          <div className="mb-4 transform group-hover:scale-105 transition-transform duration-300">
+            <p className={`text-2xl font-bold bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>
+              {title}
+            </p>
+          </div>
+          
+          <p className="text-slate-600 text-sm leading-relaxed mb-6 group-hover:text-slate-900 transition-colors">
+            {desc}
+          </p>
+
+          <div className={`w-1/3 h-1 bg-gradient-to-r ${gradient} rounded-full transform group-hover:w-1/2 transition-all duration-500 opacity-40 group-hover:opacity-100`} />
+          
+          <div className="flex space-x-2 mt-6 opacity-40 group-hover:opacity-100 transition-opacity duration-300">
+            <div className={`w-2 h-2 rounded-full bg-gradient-to-tr ${gradient} animate-bounce`} />
+            <div style={{animationDelay: '0.1s'}} className={`w-2 h-2 rounded-full bg-gradient-to-tr ${gradient} animate-bounce`} />
+            <div style={{animationDelay: '0.2s'}} className={`w-2 h-2 rounded-full bg-gradient-to-tr ${gradient} animate-bounce`} />
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 /* ---------------- PAGE ---------------- */
 
 export default function AboutPage() {
   return (
     <div className="bg-gradient-to-b from-cyan-50 via-white to-indigo-50 min-h-screen overflow-hidden">
 
-      {/* HERO */}
+      {/* HERO - RESTORED */}
       <section className="relative py-36 overflow-hidden">
         <span className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-gradient-to-r from-indigo-400 via-cyan-300 to-emerald-400 rounded-full opacity-30 animate-blob slow-blob" />
         <span className="absolute -bottom-32 -right-20 w-[600px] h-[600px] bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 rounded-full opacity-20 animate-blob slow-blob animation-delay-2000" />
@@ -154,7 +209,7 @@ export default function AboutPage() {
         </motion.div>
       </section>
 
-      {/* MISSION */}
+      {/* MISSION - RESTORED */}
       <section className="py-20">
         <h2 className="text-4xl font-extrabold text-center mb-12 text-slate-900">
           Our Mission
@@ -173,50 +228,25 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* WHY TRUST US — UNCHANGED */}
-      <section className="py-28 px-6">
-        <h2 className="text-4xl font-extrabold text-center mb-12 text-slate-900">
+      {/* WHY TRUST US — UPDATED TO 4 IN A ROW WITH DIFFERENT COLORS & ICONS */}
+      <section className="py-28 px-6 max-w-[1400px] mx-auto">
+        <h2 className="text-4xl font-extrabold text-center mb-16 text-slate-900">
           Why Trust Us?
         </h2>
 
-        <div className="flex flex-wrap justify-center gap-10">
-          {credibilityCards.map(({ title, desc, gradientFrom, gradientTo }, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.2, duration: 0.8 }}
-              className="group relative w-[280px] h-[380px] transition-all duration-500 cursor-pointer"
-            >
-              {/* SAME SKEW DESIGN */}
-              <span
-                className="absolute top-0 left-[40px] w-1/2 h-full rounded-lg transform skew-x-[12deg] transition-all duration-500 group-hover:skew-x-0 group-hover:left-[15px] group-hover:w-[calc(100%-70px)]"
-                style={{ background: `linear-gradient(315deg, ${gradientFrom}, ${gradientTo})` }}
-              />
-              <span
-                className="absolute top-0 left-[40px] w-1/2 h-full rounded-lg transform skew-x-[12deg] blur-[28px] transition-all duration-500 group-hover:skew-x-0 group-hover:left-[15px] group-hover:w-[calc(100%-70px)]"
-                style={{ background: `linear-gradient(315deg, ${gradientFrom}, ${gradientTo})` }}
-              />
-
-              {/* SAME BLOBS */}
-              <span className="pointer-events-none absolute inset-0 z-10">
-                <span className="absolute top-0 left-0 w-0 h-0 rounded-lg opacity-0 bg-[rgba(255,255,255,0.08)] backdrop-blur-[8px] shadow-[0_5px_15px_rgba(0,0,0,0.06)] transition-all duration-100 animate-blob group-hover:top-[-50px] group-hover:left-[40px] group-hover:w-[90px] group-hover:h-[90px] group-hover:opacity-100" />
-                <span className="absolute bottom-0 right-0 w-0 h-0 rounded-lg opacity-0 bg-[rgba(255,255,255,0.08)] backdrop-blur-[8px] shadow-[0_5px_15px_rgba(0,0,0,0.06)] transition-all duration-500 animate-blob animation-delay-1000 group-hover:bottom-[-50px] group-hover:right-[40px] group-hover:w-[90px] group-hover:h-[90px] group-hover:opacity-100" />
-              </span>
-
-              {/* SAME CONTENT */}
-              <div className="relative z-20 left-0 p-[20px_30px] bg-[rgba(255,255,255,0.06)] backdrop-blur-[12px] shadow-lg rounded-lg text-white transition-all duration-500 group-hover:left-[-20px] group-hover:p-[50px_30px]">
-                <h3 className="text-xl mb-2 font-bold">{title}</h3>
-                <p className="text-sm leading-relaxed">{desc}</p>
-               
-              </div>
-            </motion.div>
+        {/* Grid set to 4 columns on large screens to force one row */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {credibilityCards.map((card, idx) => (
+            <TrustCard 
+              key={idx} 
+              {...card} 
+              delay={idx * 0.2} 
+            />
           ))}
         </div>
       </section>
 
-      {/* CTA unchanged */}
+      {/* CTA - RESTORED */}
       <section className="py-24 bg-gradient-to-r from-cyan-50 via-white to-indigo-50">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -224,7 +254,7 @@ export default function AboutPage() {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto text-center px-6"
         >
-          <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-cyan-500 to-emerald-500 mb-4">
+          <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-cyan-500 to-emerald-500 mb-4 leading-[1.1]">
             Join us in advancing human potential
           </h2>
           <p className="text-lg text-slate-700 mb-8">

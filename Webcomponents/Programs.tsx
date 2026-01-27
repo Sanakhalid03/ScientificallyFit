@@ -12,49 +12,48 @@ import {
 import { motion } from "framer-motion";
 
 export function ProgramsSection() {
-const programs = [
-  {
-    title: "Focus Rebuild",
-    description: "Restore mental clarity and rebuild sustained attention.",
-    icon: IconAdjustmentsBolt,
-    href: "#focus-rebuild",
-    slug: "focus-rebuild",      // <-- add this
-    accent: "from-indigo-400 to-cyan-400",
-  },
-  {
-    title: "Burnout Reset",
-    description: "Recover energy and regulate stress physiology.",
-    icon: IconFlame,
-    href: "#burnout-reset",
-    slug: "burnout-reset",      // <-- add this
-    accent: "from-amber-400 to-orange-400",
-  },
-  {
-    title: "Sleep Reset",
-    description: "Align circadian rhythms and improve recovery.",
-    icon: IconBed,
-    href: "#sleep-reset",
-    slug: "sleep-reset",        // <-- add this
-    accent: "from-sky-400 to-blue-500",
-  },
-  {
-    title: "Communication Fitness",
-    description: "Strengthen social and professional resilience.",
-    icon: IconHeartHandshake,
-    href: "#communication-fitness",
-    slug: "communication-fitness", // <-- add this
-    accent: "from-emerald-400 to-teal-400",
-  },
-  {
-    title: "Urban Survival",
-    description: "Maintain wellbeing in high-demand environments.",
-    icon: IconBuilding,
-    href: "#urban-survival",
-    slug: "urban-survival",     // <-- add this
-    accent: "from-slate-400 to-zinc-500",
-  },
-];
-
+  const programs = [
+    {
+      title: "Focus Rebuild",
+      description: "Restore mental clarity and rebuild sustained attention.",
+      icon: IconAdjustmentsBolt,
+      href: "#focus-rebuild",
+      slug: "focus-rebuild",
+      accent: "from-indigo-400 to-cyan-400",
+    },
+    {
+      title: "Burnout Reset",
+      description: "Recover energy and regulate stress physiology.",
+      icon: IconFlame,
+      href: "#burnout-reset",
+      slug: "burnout-reset",
+      accent: "from-amber-400 to-orange-400",
+    },
+    {
+      title: "Sleep Reset",
+      description: "Align circadian rhythms and improve recovery.",
+      icon: IconBed,
+      href: "#sleep-reset",
+      slug: "sleep-reset",
+      accent: "from-sky-400 to-blue-500",
+    },
+    {
+      title: "Communication Fitness",
+      description: "Strengthen social and professional resilience.",
+      icon: IconHeartHandshake,
+      href: "#communication-fitness",
+      slug: "communication-fitness",
+      accent: "from-emerald-400 to-teal-400",
+    },
+    {
+      title: "Urban Survival",
+      description: "Maintain wellbeing in high-demand environments.",
+      icon: IconBuilding,
+      href: "#urban-survival",
+      slug: "urban-survival",
+      accent: "from-slate-400 to-zinc-500",
+    },
+  ];
 
   return (
     <section className="relative py-32 bg-gradient-to-b from-slate-50 via-white to-slate-100 overflow-hidden">
@@ -78,7 +77,8 @@ const programs = [
         </h2>
 
         <p className="mt-6 text-slate-600 text-base md:text-lg">
-          Carefully designed protocols built on neuroscience, physiology, and behavioral science.
+          Carefully designed protocols built on neuroscience, physiology, and
+          behavioral science.
         </p>
       </div>
 
@@ -88,54 +88,57 @@ const programs = [
           const Icon = program.icon;
 
           return (
-            <Link key={program.title} href={program.href}>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.08 }}
-                whileHover={{ y: -6 }}
-                className="group relative rounded-3xl bg-white/80 backdrop-blur-xl border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 p-8 overflow-hidden"
-              >
-                {/* Accent glow */}
-                <div
-                  className={cn(
-                    "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500",
-                    "bg-gradient-to-br",
-                    program.accent
-                  )}
-                  style={{
-                    maskImage:
-                      "radial-gradient(circle at top left, black, transparent 70%)",
-                  }}
-                />
+            <motion.div
+              key={program.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08 }}
+              whileHover={{ y: -6 }}
+              className="group relative rounded-3xl bg-white/80 backdrop-blur-xl border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 p-8 overflow-hidden"
+            >
+              {/* Accent glow */}
+              <div
+                className={cn(
+                  "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500",
+                  "bg-gradient-to-br",
+                  program.accent
+                )}
+                style={{
+                  maskImage:
+                    "radial-gradient(circle at top left, black, transparent 70%)",
+                }}
+              />
 
-                {/* Icon */}
-                <div className="relative z-10 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center">
-                    <Icon className="text-slate-800" size={26} />
-                  </div>
+              {/* Icon */}
+              <div className="relative z-10 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center">
+                  <Icon className="text-slate-800" size={26} />
                 </div>
+              </div>
 
-                {/* Content */}
-                <h3 className="relative z-10 text-xl font-semibold text-slate-900 mb-2">
-                  {program.title}
-                </h3>
+              {/* Content */}
+              <h3 className="relative z-10 text-xl font-semibold text-slate-900 mb-2">
+                {program.title}
+              </h3>
 
-                <p className="relative z-10 text-slate-600 text-sm leading-relaxed">
-                  {program.description}
-                </p>
+              <p className="relative z-10 text-slate-600 text-sm leading-relaxed">
+                {program.description}
+              </p>
 
-                {/* CTA */}
+              {/* CTA */}
               <div className="relative z-10 mt-6 text-sm font-semibold text-indigo-600 flex items-center gap-2">
-  <Link href={`/programs/${program.slug}`} className="flex items-center gap-1 group">
-    <span>Explore</span>
-    <span className="transition-transform group-hover:translate-x-1">→</span>
-  </Link>
-</div>
-
-              </motion.div>
-            </Link>
+                <Link
+                  href={`/programs/${program.slug}`}
+                  className="flex items-center gap-1 group"
+                >
+                  <span>Explore</span>
+                  <span className="transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </Link>
+              </div>
+            </motion.div>
           );
         })}
       </div>

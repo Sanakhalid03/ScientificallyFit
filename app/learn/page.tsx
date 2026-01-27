@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import { ArrowRight } from "lucide-react";
 
 const articles = [
   {
@@ -35,7 +36,6 @@ const articles = [
   },
 ];
 
-// Prevent bg and hoverBg from being passed to the DOM
 const Card = styled.div<{ bg: string }>`
   .card {
     width: 240px;
@@ -55,10 +55,23 @@ const Card = styled.div<{ bg: string }>`
     transition: transform 0.4s ease, box-shadow 0.4s ease;
   }
 
+  .arrow {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: all 0.35s ease;
+  }
+
+  .card:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
   .card:hover {
     transform: translateY(-12px);
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
-    /* background stays same as original */
   }
 
   .card::before,
@@ -91,27 +104,16 @@ const Card = styled.div<{ bg: string }>`
   }
 `;
 
-
 export default function LearnPage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
-
       {/* Hero */}
       <section className="relative h-[75vh] flex items-center justify-center overflow-hidden bg-[#F8FAFC]">
-
-        {/* Moving aurora gradient layer */}
         <div className="absolute inset-0 aurora-gradient opacity-80" />
-
-        {/* Slow color shift overlay */}
         <div className="absolute inset-0 animate-hue bg-[linear-gradient(120deg,#e0e7ff,#ecfeff,#fdf2f8)] mix-blend-overlay opacity-70" />
-
-        {/* Subtle tech grid */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(99,102,241,0.15)_1px,transparent_0)] bg-[size:42px_42px] opacity-30 animate-grid" />
-
-        {/* Glow fade */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-white/80" />
 
-        {/* Content */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -133,7 +135,6 @@ export default function LearnPage() {
           </div>
         </motion.div>
 
-        {/* Animations */}
         <style>{`
           .aurora-gradient {
             background: linear-gradient(120deg, #a5b4fc, #67e8f9, #f0abfc, #fcd34d);
@@ -154,25 +155,28 @@ export default function LearnPage() {
       </section>
 
       {/* Cards */}
-   <section className="flex justify-center gap-10 flex-wrap pb-24">
-  {articles.map((a, i) => (
-    <Link key={i} href={`/learn/${a.slug}`}>
-      <Card bg={a.bg}>
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="card"
-        >
-          <div>
-            <h3>{a.title}</h3>
-            <p className="text-sm mt-3 font-normal text-slate-600">{a.desc}</p>
-          </div>
-        </motion.div>
-      </Card>
-    </Link>
-  ))}
-</section>
+      <section className="flex justify-center gap-10 flex-wrap pb-24">
+        {articles.map((a, i) => (
+          <Link key={i} href={`/learn/${a.slug}`}>
+            <Card bg={a.bg}>
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="card"
+              >
+                <div>
+                  <h3>{a.title}</h3>
+                  <p className="text-sm mt-3 font-normal text-slate-600">
+                    {a.desc}
+                  </p>
+                </div>
 
+                <ArrowRight size={24} className="arrow" />
+              </motion.div>
+            </Card>
+          </Link>
+        ))}
+      </section>
     </div>
   );
 }

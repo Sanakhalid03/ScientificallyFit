@@ -18,7 +18,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+          <div className="hidden md:flex items-center gap-8 text-md font-medium">
             <Link href="/modules" className="hover:text-blue-600 transition">
               Modules
             </Link>
@@ -61,7 +61,7 @@ export default function Navbar() {
               exit={{ opacity: 0, y: -10 }}
               className="md:hidden bg-white border-t border-gray-200"
             >
-              <div className="px-6 py-4 flex flex-col gap-4 text-sm">
+              <div className="px-6 py-4 flex flex-col items-center gap-4 text-sm">
                 <Link href="/modules" onClick={() => setOpen(false)}>Modules</Link>
                 <Link href="/programs" onClick={() => setOpen(false)}>Programs</Link>
                 <Link href="/learn" onClick={() => setOpen(false)}>Learn</Link>

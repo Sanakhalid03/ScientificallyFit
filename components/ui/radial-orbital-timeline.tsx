@@ -105,7 +105,7 @@ export default function RadialOrbitalTimeline({
     <div
       ref={containerRef}
       onClick={handleContainerClick}
-      className="w-full min-h-screen flex flex-col items-center justify-start bg-linear-to-br from-indigo-50 via-white to-cyan-50 overflow-hidden py-20"
+      className="relative z-0 w-full min-h-screen flex flex-col items-center justify-start bg-linear-to-br from-indigo-50 via-white to-cyan-50 overflow-hidden py-20"
     >
       {/* Heading */}
       <div className="text-center mb-16 max-w-xl px-4">
